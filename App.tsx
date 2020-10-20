@@ -7,6 +7,7 @@ import {
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto'
 import { AppLoading } from 'expo'
+import { NavigationContainer } from '@react-navigation/native'
 
 import Screens from './src/navigation/Main'
 
@@ -22,9 +23,9 @@ export default function App() {
   }
 
   return (
-    <>
+    <NavigationContainer>
       <StatusBar style="light" />
       <Screens />
-    </>
+    </NavigationContainer>
   )
 }

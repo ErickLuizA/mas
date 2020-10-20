@@ -5,6 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import Home from '../screens/Home/Home'
 import Search from '../screens/Search'
 import Favorites from '../screens/Favorites'
+import StyleGuide from '../components/StyleGuide'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -26,6 +27,23 @@ const icons = {
 export default function BottomTab() {
   return (
     <Navigator
+      tabBarOptions={{
+        tabStyle: {
+          top: 15,
+        },
+        style: {
+          backgroundColor: StyleGuide.primary,
+          borderRadius: 50,
+          borderTopWidth: 0,
+          position: 'absolute',
+          bottom: 0,
+        },
+        safeAreaInsets: {
+          bottom: 30,
+        },
+        activeTintColor: StyleGuide.text,
+        inactiveTintColor: StyleGuide.background,
+      }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           const { lib: Icon, name } = icons[route.name]
