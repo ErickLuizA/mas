@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexGrow: 0.05,
   },
 
   img: {
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 15,
     paddingVertical: 10,
-    top: 15,
+    top: 10,
   },
 })
 
@@ -35,12 +36,7 @@ export default function Header() {
         rippleColor={StyleGuide.primary}
         style={styles.button}
         onPress={() => navigate('Search')}>
-        <MaterialIcons
-          name="search"
-          size={30}
-          color="#fff"
-          style={styles.icon}
-        />
+        <MaterialIcons name="search" size={30} color="#fff" />
       </RectButton>
     </View>
   )
