@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet, Dimensions, Image } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
-import StyleGuide from './StyleGuide'
+import StyleGuide from '../../components/StyleGuide'
 
 interface CardProps {
   id: number
@@ -41,7 +41,7 @@ export default function Card({ id, name, poster_path, onPress }: CardProps) {
       <Image
         resizeMethod="scale"
         source={{
-          uri: `https://image.tmdb.org/t/p/w500/${poster_path}`,
+          uri: `https://image.tmdb.org/t/p/w500${poster_path}`,
         }}
         style={styles.img}
       />

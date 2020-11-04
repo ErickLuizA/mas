@@ -3,15 +3,15 @@ import { View, Text, StyleSheet } from 'react-native'
 import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types'
 import { FlatList } from 'react-native-gesture-handler'
 import Card from './Card'
-import StyleGuide from './StyleGuide'
+import StyleGuide from '../../components/StyleGuide'
 import { useNavigation } from '@react-navigation/native'
 
 interface ListProps {
   name: string
 
-  popularData?: TvResult[] | MovieResult[]
+  popularData?: (TvResult | MovieResult)[]
 
-  airingData?: TvResult[] | MovieResult[]
+  airingData?: (TvResult | MovieResult)[]
 }
 
 const styles = StyleSheet.create({

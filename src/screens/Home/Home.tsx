@@ -5,7 +5,7 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@expo/vector-icons'
 import Header from '../../components/Header'
-import List from '../../components/List'
+import List from './List'
 import StyleGuide from '../../components/StyleGuide'
 import moviedb from '../../services/api'
 
@@ -47,10 +47,18 @@ const styles = StyleSheet.create({
     color: StyleGuide.text,
     marginBottom: 10,
   },
+
+  shimmerCard: {
+    width: width * 0.4,
+    height: width * 0.5,
+    borderRadius: 5,
+    marginRight: 10,
+  },
 })
 
 export default function Home() {
   const [tv, setTv] = useState(true)
+
   const [popularTv, setPopularTv] = useState<TvResult[]>([])
   const [airingTv, setAiringTv] = useState<TvResult[]>([])
   const [popularMovies, setPopularMovies] = useState<MovieResult[]>([])
@@ -85,7 +93,7 @@ export default function Home() {
       <Header />
       <View style={styles.row}>
         <RectButton
-          onPress={() => setTv((prev) => !prev)}
+          onPress={() => setTv(true)}
           style={[
             styles.rectButton,
             { backgroundColor: tv ? StyleGuide.primary : StyleGuide.text },
@@ -106,7 +114,7 @@ export default function Home() {
           </>
         </RectButton>
         <RectButton
-          onPress={() => setTv((prev) => !prev)}
+          onPress={() => setTv(false)}
           style={[
             styles.rectButton,
             { backgroundColor: tv ? StyleGuide.text : StyleGuide.primary },

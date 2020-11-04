@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@expo/vector-icons'
 import StyleGuide from '../../components/StyleGuide'
 import { RectButton } from 'react-native-gesture-handler'
-import moviedb from '../../services/api'
+import Stars from '../../components/Stars'
 
 const { width } = Dimensions.get('window')
 
@@ -47,10 +47,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: StyleGuide.text,
     textAlign: 'left',
-  },
-
-  stars: {
-    flexDirection: 'row',
   },
 
   box: {
@@ -100,7 +96,7 @@ export default function Details() {
         </RectButton>
       </View>
       <View style={styles.row}>
-        <Text style={styles.text}>{params.item.name}</Text>
+        <Text style={styles.text}>{params.item.title || params.item.name}</Text>
         <MaterialIcons
           name="favorite-border"
           size={30}
@@ -108,19 +104,7 @@ export default function Details() {
         />
       </View>
       <View style={styles.row}>
-        <View style={styles.stars}>
-          {Array(Math.floor(params.item.vote_average / 2)).fill(
-            <MaterialIcons name="star" size={24} color={StyleGuide.yellow} />,
-          )}
-          {params.item.vote_average / 2 >
-            Math.floor(params.item.vote_average / 2) && (
-            <MaterialIcons
-              name="star-half"
-              size={24}
-              color={StyleGuide.yellow}
-            />
-          )}
-        </View>
+        <Stars vote_average={params.item.vote_average} />
       </View>
       <View style={styles.box}>
         <Text style={styles.text}>Sinopse </Text>
