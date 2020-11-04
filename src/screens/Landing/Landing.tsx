@@ -1,7 +1,7 @@
-import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
 import StyleGuide from '../../components/StyleGuide'
 
 import cinema from '../../images/cinema.png'
@@ -25,15 +25,7 @@ const styles = StyleSheet.create({
 
   icon: {
     width: width * 0.8,
-  },
-
-  text: {
-    color: StyleGuide.text,
-    fontFamily: 'Roboto_500Medium',
-    fontSize: 16,
-    textAlign: 'center',
-    paddingHorizontal: 25,
-    marginBottom: 30,
+    marginBottom: 10,
   },
 
   button: {
@@ -58,10 +50,6 @@ export default function Landing() {
     <View style={styles.container}>
       <Image source={cinema} style={styles.image} />
       <Image source={mas} style={styles.icon} />
-      <Text style={styles.text}>
-        {' '}
-        Have fun watching movies and series for free{' '}
-      </Text>
       <RectButton style={styles.button} onPress={() => navigate('BottomTab')}>
         <Text style={styles.buttonText}>GET STARTED</Text>
       </RectButton>

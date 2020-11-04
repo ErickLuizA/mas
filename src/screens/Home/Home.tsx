@@ -1,15 +1,19 @@
-import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types'
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
+import { View, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { MaterialIcons } from '@expo/vector-icons'
-import Header from '../../components/Header'
-import List from './List'
-import StyleGuide from '../../components/StyleGuide'
-import moviedb from '../../services/api'
+import {
+  getAiringTodayTvShows,
+  getPlayingNowMovies,
+  getPopularMovies,
+  getPopularTvShows,
+} from '../../services/api'
+import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types'
 
-const { width } = Dimensions.get('window')
+import Header from '../../components/Header'
+import StyleGuide from '../../components/StyleGuide'
+import List from './List'
+import Button from './Button'
 
 const styles = StyleSheet.create({
   container: {
@@ -26,130 +30,84 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-
-  rectButton: {
-    width: width * 0.3,
-    height: width * 0.2,
-    marginRight: 20,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  rectButtonText: {
-    fontFamily: 'Roboto_500Medium',
-    fontSize: 16,
-  },
-
-  text: {
-    fontFamily: 'Roboto_700Bold',
-    fontSize: 20,
-    color: StyleGuide.text,
-    marginBottom: 10,
-  },
-
-  shimmerCard: {
-    width: width * 0.4,
-    height: width * 0.5,
-    borderRadius: 5,
-    marginRight: 10,
-  },
 })
 
 export default function Home() {
-  const [tv, setTv] = useState(true)
+  const [isTv, setisTv] = useState(true)
 
-  const [popularTv, setPopularTv] = useState<TvResult[]>([])
-  const [airingTv, setAiringTv] = useState<TvResult[]>([])
-  const [popularMovies, setPopularMovies] = useState<MovieResult[]>([])
-  const [airingMovies, setAiringMovies] = useState<MovieResult[]>([])
+  const [tvData, setTvData] = useState<{
+    popularTvShows: TvResult[]
+    airingTodayTvShows: TvResult[]
+  }>({
+    popularTvShows: [],
+    airingTodayTvShows: [],
+  })
+
+  const [moviesData, setMoviesData] = useState<{
+    popularMovies: MovieResult[]
+    playingNowMovies: MovieResult[]
+  }>({
+    popularMovies: [],
+    playingNowMovies: [],
+  })
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (tv) {
-          const { results } = await moviedb.tvPopular()
-          const { results: tvAiringToday } = await moviedb.tvAiringToday()
+    async function fetchData() {
+      if (isTv) {
+        const popular = await getPopularTvShows()
+        const airingNow = await getAiringTodayTvShows()
 
-          setPopularTv(results!)
-          setAiringTv(tvAiringToday!)
-        } else {
-          const { results } = await moviedb.moviePopular()
-          const { results: movieNowPlaying } = await moviedb.movieNowPlaying()
-
-          setPopularMovies(results!)
-          setAiringMovies(movieNowPlaying!)
+        const data = {
+          popularTvShows: popular!,
+          airingTodayTvShows: airingNow!,
         }
-      } catch (e) {
-        alert('Not internet connection')
+
+        setTvData(data)
+      } else {
+        const popular = await getPopularMovies()
+        const playingNow = await getPlayingNowMovies()
+
+        const data = {
+          popularMovies: popular!,
+          playingNowMovies: playingNow!,
+        }
+
+        setMoviesData(data)
       }
     }
 
     fetchData()
-  }, [tv])
+  }, [isTv])
 
   return (
     <SafeAreaView style={styles.container}>
       <Header />
       <View style={styles.row}>
-        <RectButton
-          onPress={() => setTv(true)}
-          style={[
-            styles.rectButton,
-            { backgroundColor: tv ? StyleGuide.primary : StyleGuide.text },
-          ]}>
-          <>
-            <MaterialIcons
-              name="movie"
-              size={24}
-              color={tv ? StyleGuide.text : StyleGuide.background}
-            />
-            <Text
-              style={[
-                styles.rectButtonText,
-                { color: tv ? StyleGuide.text : StyleGuide.background },
-              ]}>
-              TvShows
-            </Text>
-          </>
-        </RectButton>
-        <RectButton
-          onPress={() => setTv(false)}
-          style={[
-            styles.rectButton,
-            { backgroundColor: tv ? StyleGuide.text : StyleGuide.primary },
-          ]}>
-          <>
-            <MaterialIcons
-              name="tv"
-              size={24}
-              color={tv ? StyleGuide.background : StyleGuide.text}
-            />
-            <Text
-              style={[
-                styles.rectButtonText,
-                {
-                  color: tv ? StyleGuide.background : StyleGuide.text,
-                },
-              ]}>
-              Movies
-            </Text>
-          </>
-        </RectButton>
+        <Button
+          name="TvShows"
+          icon="tv"
+          color={isTv ? StyleGuide.text : StyleGuide.background}
+          backgroundColor={isTv ? StyleGuide.primary : StyleGuide.text}
+          onPress={() => setisTv((state) => !state)}
+        />
+        <Button
+          name="Movies"
+          icon="movie"
+          color={isTv ? StyleGuide.background : StyleGuide.text}
+          backgroundColor={isTv ? StyleGuide.text : StyleGuide.primary}
+          onPress={() => setisTv((state) => !state)}
+        />
       </View>
 
       <ScrollView style={styles.scrollView}>
-        {tv ? (
-          <>
-            <List name="Popular TvShows" popularData={popularTv} />
-            <List name="Airing today TvShows" airingData={airingTv} />
-          </>
-        ) : (
-          <>
-            <List name="Popular Movies" popularData={popularMovies} />
-            <List name="Recent Movies" airingData={airingMovies} />
-          </>
-        )}
+        <List
+          name="Popular"
+          data={isTv ? tvData.popularTvShows : moviesData.popularMovies}
+        />
+        <List
+          name="Today"
+          data={isTv ? tvData.airingTodayTvShows : moviesData.playingNowMovies}
+        />
       </ScrollView>
     </SafeAreaView>
   )

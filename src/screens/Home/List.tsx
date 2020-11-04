@@ -9,9 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 interface ListProps {
   name: string
 
-  popularData?: (TvResult | MovieResult)[]
-
-  airingData?: (TvResult | MovieResult)[]
+  data: (TvResult | MovieResult)[]
 }
 
 const styles = StyleSheet.create({
@@ -27,53 +25,30 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function List({ name, popularData, airingData }: ListProps) {
+export default function List({ name, data }: ListProps) {
   const { navigate } = useNavigation()
   return (
     <View style={styles.container}>
-      {name.includes('Popular') ? (
-        <>
-          <Text style={styles.text}> {name} </Text>
-          <FlatList
-            horizontal
-            renderItem={({ item }) => (
-              <Card
-                onPress={() =>
-                  navigate('Details', {
-                    item,
-                  })
-                }
-                id={item.id!}
-                name={item.name!}
-                poster_path={item.poster_path!}
-              />
-            )}
-            data={popularData}
-            keyExtractor={(item) => item.id?.toString()!}
-          />
-        </>
-      ) : (
-        <>
-          <Text style={styles.text}> {name} </Text>
-          <FlatList
-            horizontal
-            renderItem={({ item }) => (
-              <Card
-                onPress={() =>
-                  navigate('Details', {
-                    item,
-                  })
-                }
-                id={item.id!}
-                name={item.name!}
-                poster_path={item.poster_path!}
-              />
-            )}
-            data={airingData}
-            keyExtractor={(item) => item.id?.toString()!}
-          />
-        </>
-      )}
+      <>
+        <Text style={styles.text}> {name} </Text>
+        <FlatList
+          horizontal
+          renderItem={({ item }) => (
+            <Card
+              onPress={() =>
+                navigate('Details', {
+                  item,
+                })
+              }
+              id={item.id!}
+              name={item.name! || item.title!}
+              poster_path={item.poster_path!}
+            />
+          )}
+          data={data}
+          keyExtractor={(item) => item.id?.toString()!}
+        />
+      </>
     </View>
   )
 }
