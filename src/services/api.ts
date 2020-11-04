@@ -25,3 +25,9 @@ export const getPlayingNowMovies = async () => {
 
   return results
 }
+
+export const getSearch = async (search: string) => {
+  const { results } = await moviedb.searchMulti({ query: search })
+
+  return results
+}

@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import StyleGuide from '../../components/StyleGuide'
 import SearchBox from './SearchBox'
 import Card from './Card'
-import moviedb from '../../services/api'
 import {
   MovieResult,
   PersonResult,
@@ -12,6 +11,7 @@ import {
 } from 'moviedb-promise/dist/request-types'
 import { useNavigation } from '@react-navigation/native'
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder'
+import { getSearch } from '../../services/api'
 
 const { width } = Dimensions.get('window')
 
@@ -46,9 +46,9 @@ export default function Search() {
 
   async function handleSubmit() {
     setVisible(false)
-    const { results } = await moviedb.searchMulti({ query: search })
+    const response = await getSearch(search)
 
-    setItems(results)
+    setItems(response)
     setVisible(true)
   }
 
@@ -77,7 +77,7 @@ export default function Search() {
               <Card
                 onPress={() => navigate('Details', { item })}
                 key={item.id}
-                name={item.title || item.name}
+                name={item.name! || item.title!}
                 date={item.first_air_date}
                 image={item.poster_path || item.backdrop_path}
                 vote_average={item.vote_average}
