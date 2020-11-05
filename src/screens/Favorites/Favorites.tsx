@@ -8,6 +8,11 @@ import Header from '../../components/Header'
 import StyleGuide from '../../components/StyleGuide'
 import Card from '../../components/Card'
 import { FlatList } from 'react-native-gesture-handler'
+import {
+  MovieResult,
+  PersonResult,
+  TvResult,
+} from 'moviedb-promise/dist/request-types'
 
 const styles = StyleSheet.create({
   container: {
@@ -23,14 +28,16 @@ const styles = StyleSheet.create({
 })
 
 export default function Favorites() {
-  const [favorites, setFavorites] = useState([])
+  const [favorites, setFavorites] = useState<
+    (MovieResult | TvResult | PersonResult)[]
+  >([])
   const { navigate } = useNavigation()
 
   useLayoutEffect(() => {
     const fetchFavorites = async () => {
       const response = await getAllFromStorage()
 
-      setFavorites(JSON.parse(response))
+      setFavorites(response)
     }
 
     fetchFavorites()

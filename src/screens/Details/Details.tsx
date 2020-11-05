@@ -11,7 +11,6 @@ import {
   getFromStorage,
   removeFromStorage,
 } from '../../services/storage'
-import AsyncStorage from '@react-native-community/async-storage'
 
 const { width } = Dimensions.get('window')
 

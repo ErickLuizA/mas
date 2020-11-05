@@ -1,11 +1,18 @@
 import AsyncStorage from '@react-native-community/async-storage'
+import {
+  MovieResult,
+  PersonResult,
+  TvResult,
+} from 'moviedb-promise/dist/request-types'
 
-export const getFromStorage = async (item: any) => {
+type Result = MovieResult | TvResult | PersonResult
+
+export const getFromStorage = async (item: Result) => {
   const favorites = await AsyncStorage.getItem('@Mas/favorites')
-  let favoritesArray: string[] = []
+  let favoritesArray: Result[] = []
 
   if (favorites) {
-    favoritesArray = JSON.parse(favorites)
+    favoritesArray = JSON.parse(favorites) as Result[]
   }
 
   const favoriteIndex = favoritesArray.findIndex((fav) => item.id === fav.id)
@@ -18,15 +25,16 @@ export const getFromStorage = async (item: any) => {
 }
 
 export const getAllFromStorage = async () => {
-  return (await AsyncStorage.getItem('@Mas/favorites')) as any
+  const response = await AsyncStorage.getItem('@Mas/favorites')
+  return JSON.parse(response!) as Result[]
 }
 
-export const addToStorage = async (item: any) => {
-  const favorites = await getAllFromStorage()
-  let favoritesArray: string[] = []
+export const addToStorage = async (item: Result) => {
+  const favorites = await AsyncStorage.getItem('@Mas/favorites')
+  let favoritesArray: Result[] = []
 
   if (favorites) {
-    favoritesArray = JSON.parse(favorites)
+    favoritesArray = JSON.parse(favorites) as Result[]
   }
 
   const favoriteIndex = favoritesArray.findIndex((fav) => item === fav)
@@ -38,12 +46,12 @@ export const addToStorage = async (item: any) => {
   await AsyncStorage.setItem('@Mas/favorites', JSON.stringify(favoritesArray))
 }
 
-export const removeFromStorage = async (item: any) => {
-  const favorites = await getAllFromStorage()
-  let favoritesArray: [] = []
+export const removeFromStorage = async (item: Result) => {
+  const favorites = await AsyncStorage.getItem('@Mas/favorites')
+  let favoritesArray: Result[] = []
 
   if (favorites) {
-    favoritesArray = JSON.parse(favorites)
+    favoritesArray = JSON.parse(favorites) as Result[]
   }
 
   const favoriteIndex = favoritesArray.findIndex((fav) => item === fav)
