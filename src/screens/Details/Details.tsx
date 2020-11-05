@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, Image, Dimensions, Text } from 'react-native'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -6,6 +6,12 @@ import { MaterialIcons } from '@expo/vector-icons'
 import StyleGuide from '../../components/StyleGuide'
 import { RectButton } from 'react-native-gesture-handler'
 import Stars from '../../components/Stars'
+import {
+  addToStorage,
+  getFromStorage,
+  removeFromStorage,
+} from '../../services/storage'
+import AsyncStorage from '@react-native-community/async-storage'
 
 const { width } = Dimensions.get('window')
 
@@ -77,6 +83,28 @@ export default function Details() {
   const { params } = useRoute<DetailsScreenRouteProp>()
   const { goBack } = useNavigation()
 
+  const [favorite, setFavorite] = useState(false)
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      const response = await getFromStorage(params.item)
+
+      setFavorite(response)
+    }
+
+    fetchResults()
+  }, [params.item])
+
+  const toggleFavorite = async () => {
+    if (!favorite) {
+      setFavorite(true)
+      await addToStorage(params.item)
+    } else {
+      setFavorite(false)
+      await removeFromStorage(params.item)
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -98,11 +126,13 @@ export default function Details() {
       </View>
       <View style={styles.row}>
         <Text style={styles.text}>{params.item.title || params.item.name}</Text>
-        <MaterialIcons
-          name="favorite-border"
-          size={30}
-          color={StyleGuide.text}
-        />
+        <RectButton onPress={toggleFavorite}>
+          <MaterialIcons
+            name={favorite ? 'favorite' : 'favorite-border'}
+            size={30}
+            color={StyleGuide.text}
+          />
+        </RectButton>
       </View>
       <View style={styles.row}>
         <Stars vote_average={params.item.vote_average} />

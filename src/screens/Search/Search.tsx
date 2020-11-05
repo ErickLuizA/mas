@@ -3,7 +3,7 @@ import { Dimensions, FlatList, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import StyleGuide from '../../components/StyleGuide'
 import SearchBox from './SearchBox'
-import Card from './Card'
+import Card from '../../components/Card'
 import {
   MovieResult,
   PersonResult,
