@@ -1,7 +1,3 @@
-<p align="center"> 
-  <img alt="MaS icon" src="./assets/icon.png"  width="280"/>
-</p>
-
 <h1 align="center"> MaS </h1>
 
 <p align="center">
@@ -33,7 +29,7 @@
 
 ## :clipboard: Description
 
-MaS is a app for searching series and movies
+MaS is a app for searching Movies and Series
 
 ## :building_construction: Technologies
 
