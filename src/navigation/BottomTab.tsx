@@ -3,56 +3,58 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import Home from '../screens/Home/Home'
-import Search from '../screens/Search'
-import Favorites from '../screens/Favorites'
+// import Search from '../screens/Search'
+// import Favorites from '../screens/Favorites'
 import StyleGuide from '../components/StyleGuide'
 
 const { Navigator, Screen } = createBottomTabNavigator()
-
-const icons = {
-  Home: {
-    lib: MaterialIcons,
-    name: 'home',
-  },
-  Search: {
-    lib: MaterialIcons,
-    name: 'search',
-  },
-  Favorites: {
-    lib: MaterialIcons,
-    name: 'favorite-border',
-  },
-}
 
 export default function BottomTab() {
   return (
     <Navigator
       tabBarOptions={{
-        tabStyle: {
-          top: 15,
-        },
         style: {
           backgroundColor: StyleGuide.primary,
-          borderRadius: 50,
           borderTopWidth: 0,
-          position: 'absolute',
-          bottom: 0,
+          height: 60,
+          justifyContent: 'center',
         },
-        safeAreaInsets: {
-          bottom: 30,
+        labelStyle: {
+          fontSize: 12,
+          paddingBottom: 4,
         },
         activeTintColor: StyleGuide.text,
         inactiveTintColor: StyleGuide.background,
-      }}
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          const { lib: Icon, name } = icons[route.name]
-          return <Icon name={name} size={size} color={color} />
-        },
-      })}>
-      <Screen name="Home" component={Home} />
-      <Screen name="Search" component={Search} />
-      <Screen name="Favorites" component={Favorites} />
+      }}>
+      <Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <MaterialIcons name="home" size={size} color={color} />
+          },
+        }}
+      />
+      {/* <Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <MaterialIcons name="search" size={size} color={color} />
+          },
+        }}
+      />
+      <Screen
+        name="Favorites"
+        component={Favorites}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return (
+              <MaterialIcons name="favorite-border" size={size} color={color} />
+            )
+          },
+        }}
+      /> */}
     </Navigator>
   )
 }
