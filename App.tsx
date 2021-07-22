@@ -6,7 +6,7 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto'
-import { AppLoading } from 'expo'
+import AppLoading from 'expo-app-loading'
 import { NavigationContainer } from '@react-navigation/native'
 
 import Screens from './src/navigation/Main'
