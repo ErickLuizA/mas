@@ -40,7 +40,7 @@ export default function Details() {
     params: { item },
   } = useRoute<DetailsScreenRouteProp>()
   const { isFavorite, toggleFavorite } = useIsFavorite({
-    item: item.data,
+    item: item,
   })
 
   return (

@@ -4,8 +4,20 @@ import { Movie } from '../models/Movie'
 import { TvShow } from '../models/TvShow'
 
 interface IUseIsFavoriteProps {
-  item: Movie | TvShow
+  item: Favorite
 }
+
+type FavoriteMovie = {
+  type: 'movie'
+  data: Movie
+}
+
+type FavoriteTvShow = {
+  type: 'tvShow'
+  data: TvShow
+}
+
+type Favorite = FavoriteMovie | FavoriteTvShow
 
 export default function useIsFavorite({ item }: IUseIsFavoriteProps) {
   const [isFavorite, setIsFavorite] = useState(false)
@@ -14,14 +26,14 @@ export default function useIsFavorite({ item }: IUseIsFavoriteProps) {
     // eslint-disable-next-line prettier/prettier
     (async () => {
       const favorites = await AsyncStorage.getItem('@Mas/favorites')
-      let favoritesArray: Movie[] | TvShow[] = []
+      let favoritesArray: Favorite[] = []
 
       if (favorites) {
         favoritesArray = JSON.parse(favorites)
       }
 
       const favoriteIndex = favoritesArray.findIndex(
-        (fav) => item.id === fav.id,
+        (fav) => item.data.id === fav.data.id,
       )
 
       setIsFavorite(favoriteIndex !== -1)
@@ -33,18 +45,20 @@ export default function useIsFavorite({ item }: IUseIsFavoriteProps) {
 
     const favorites = await AsyncStorage.getItem('@Mas/favorites')
 
-    let favoritesArray: any = []
+    let favoritesArray: Favorite[] = []
 
     if (favorites) {
       favoritesArray = JSON.parse(favorites)
     }
 
-    const favoriteIndex = favoritesArray.findIndex((fav: any) => item === fav)
+    const favoriteIndex = favoritesArray.findIndex(
+      (fav) => item.data.id === fav.data.id,
+    )
 
-    if (favoriteIndex === -1) {
-      favoritesArray.push(item)
-    } else {
+    if (favoriteIndex !== -1) {
       favoritesArray.splice(favoriteIndex, 1)
+    } else {
+      favoritesArray.push(item)
     }
 
     await AsyncStorage.setItem('@Mas/favorites', JSON.stringify(favoritesArray))
