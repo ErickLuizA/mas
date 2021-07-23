@@ -10,6 +10,17 @@ export default StyleSheet.create({
     backgroundColor: StyleGuide.background,
   },
 
+  alternativeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: StyleGuide.background,
+  },
+
+  text: {
+    color: StyleGuide.text,
+  },
+
   row: {
     flexDirection: 'row',
     paddingHorizontal: 20,

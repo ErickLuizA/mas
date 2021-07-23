@@ -19,29 +19,34 @@ export default function useTvShows() {
   })
 
   useEffect(() => {
-    // eslint-disable-next-line prettier/prettier
-    (async () => {
-      try {
-        const [popularResponse, latestResponse] = await Promise.all([
-          api.get<ApiResponse<TvShow>>('/tv/popular'),
-          api.get<ApiResponse<TvShow>>('/tv/airing_today'),
-        ])
-
-        setTvShowsData({
-          loading: false,
-          error: '',
-          popularTvShows: popularResponse.data.results,
-          latestTvShows: latestResponse.data.results,
-        })
-      } catch (error) {
-        setTvShowsData((state) => ({
-          ...state,
-          loading: false,
-          error: 'Error while getting TvShows data',
-        }))
-      }
-    })()
+    getTvShows()
   }, [])
 
-  return { tvShowsData }
+  async function getTvShows() {
+    try {
+      const [popularResponse, latestResponse] = await Promise.all([
+        api.get<ApiResponse<TvShow>>('/tv/popular'),
+        api.get<ApiResponse<TvShow>>('/tv/airing_today'),
+      ])
+
+      setTvShowsData({
+        loading: false,
+        error: '',
+        popularTvShows: popularResponse.data.results,
+        latestTvShows: latestResponse.data.results,
+      })
+    } catch (error) {
+      setTvShowsData((state) => ({
+        ...state,
+        loading: false,
+        error: 'Error while getting TvShows data',
+      }))
+    }
+  }
+
+  async function retryGetTvShows() {
+    await getTvShows()
+  }
+
+  return { tvShowsData, retryGetTvShows }
 }

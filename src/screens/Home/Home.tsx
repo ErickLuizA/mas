@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, ActivityIndicator, ScrollView } from 'react-native'
+import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/core'
 import { MaterialIcons } from '@expo/vector-icons'
@@ -20,17 +20,39 @@ import styles from './styles'
 export default function Home() {
   const [isTv, setisTv] = useState(true)
 
-  const { tvShowsData } = useTvShows()
-  const { moviesData } = useMovies()
+  const { tvShowsData, retryGetTvShows } = useTvShows()
+  const { moviesData, retryGetMovies } = useMovies()
 
   const { navigate } = useNavigation()
 
   if (tvShowsData.loading || moviesData.loading) {
-    return <ActivityIndicator />
+    return (
+      <View style={styles.alternativeContainer}>
+        <ActivityIndicator color={StyleGuide.text} size={30} />
+      </View>
+    )
   }
 
   if (tvShowsData.error || moviesData.error) {
-    return <Text>Error</Text>
+    return (
+      <View style={styles.alternativeContainer}>
+        <Text style={styles.text}>
+          {tvShowsData.error ? tvShowsData.error : moviesData.error}
+        </Text>
+        <RectButton
+          onPress={async () => {
+            if (tvShowsData.error) {
+              await retryGetTvShows()
+            }
+
+            if (tvShowsData.error) {
+              await retryGetMovies()
+            }
+          }}>
+          <Text style={styles.text}>Click to try again</Text>
+        </RectButton>
+      </View>
+    )
   }
 
   return (

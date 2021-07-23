@@ -19,29 +19,34 @@ export default function useMovies() {
   })
 
   useEffect(() => {
-    // eslint-disable-next-line prettier/prettier
-    (async () => {
-      try {
-        const [popularResponse, latestResponse] = await Promise.all([
-          api.get<ApiResponse<Movie>>('/movie/popular'),
-          api.get<ApiResponse<Movie>>('/movie/now_playing'),
-        ])
-
-        setMoviesData({
-          loading: false,
-          error: '',
-          popularMovies: popularResponse.data.results,
-          latestMovies: latestResponse.data.results,
-        })
-      } catch (error) {
-        setMoviesData((state) => ({
-          ...state,
-          loading: false,
-          error: 'Error while getting movies data',
-        }))
-      }
-    })()
+    getMovies()
   }, [])
 
-  return { moviesData }
+  async function getMovies() {
+    try {
+      const [popularResponse, latestResponse] = await Promise.all([
+        api.get<ApiResponse<Movie>>('/movie/popular'),
+        api.get<ApiResponse<Movie>>('/movie/now_playing'),
+      ])
+
+      setMoviesData({
+        loading: false,
+        error: '',
+        popularMovies: popularResponse.data.results,
+        latestMovies: latestResponse.data.results,
+      })
+    } catch (error) {
+      setMoviesData((state) => ({
+        ...state,
+        loading: false,
+        error: 'Error while getting movies data',
+      }))
+    }
+  }
+
+  async function retryGetMovies() {
+    await getMovies()
+  }
+
+  return { moviesData, retryGetMovies }
 }
