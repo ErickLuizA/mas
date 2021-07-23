@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import Home from '../screens/Home/Home'
-// import Search from '../screens/Search'
+import Search from '../screens/Search'
 import Favorites from '../screens/Favorites'
 import StyleGuide from '../components/StyleGuide'
 
@@ -35,7 +35,7 @@ export default function BottomTab() {
           },
         }}
       />
-      {/* <Screen
+      <Screen
         name="Search"
         component={Search}
         options={{
@@ -43,7 +43,7 @@ export default function BottomTab() {
             return <MaterialIcons name="search" size={size} color={color} />
           },
         }}
-      /> */}
+      />
       <Screen
         name="Favorites"
         component={Favorites}

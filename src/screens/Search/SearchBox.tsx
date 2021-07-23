@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Dimensions, TextInput } from 'react-native'
+import { View, StyleSheet, TextInput } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import StyleGuide from '../../components/StyleGuide'
 
@@ -8,25 +8,6 @@ interface SearchBoxProps {
   value: string
   onSubmitEditing: () => void
 }
-
-const { width } = Dimensions.get('window')
-
-const styles = StyleSheet.create({
-  container: {
-    width: width * 0.8,
-    paddingVertical: 12,
-    paddingHorizontal: 5,
-    backgroundColor: StyleGuide.lightBackground,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderRadius: 5,
-  },
-
-  input: {
-    color: StyleGuide.text,
-  },
-})
 
 export default function SearchBox({
   onChangeText,
@@ -37,7 +18,6 @@ export default function SearchBox({
     <View style={styles.container}>
       <TextInput
         autoCapitalize="words"
-        autoFocus
         enablesReturnKeyAutomatically
         returnKeyType="search"
         placeholder="Search for a movie or series"
@@ -51,3 +31,21 @@ export default function SearchBox({
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    paddingVertical: 12,
+    paddingHorizontal: 5,
+    marginBottom: 12,
+    backgroundColor: StyleGuide.lightBackground,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+  },
+
+  input: {
+    color: StyleGuide.text,
+  },
+})

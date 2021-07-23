@@ -18,8 +18,8 @@ export default function Main() {
         component={BottomTab}
         options={{
           headerShown: true,
-          header: (props) => {
-            if (props.scene.route.name !== 'search') {
+          header: (props: any) => {
+            if (props.scene.route.state.index !== 1) {
               return <Header />
             }
           },

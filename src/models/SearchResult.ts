@@ -12,5 +12,7 @@ export interface SearchResult {
   original_language: string
   vote_count: number
   name: string
+  title: string
+  release_date: string
   original_name: string
 }
