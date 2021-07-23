@@ -1,69 +1,78 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { useState } from 'react'
+import { ActivityIndicator, View, Text, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { getAllFromStorage } from '../../services/storage'
+import { RectButton } from 'react-native-gesture-handler'
 
-import Header from '../../components/Header'
+import useFavorites from '../../hooks/useFavorites'
+
 import StyleGuide from '../../components/StyleGuide'
 import Card from '../../components/Card'
-import { FlatList } from 'react-native-gesture-handler'
-import {
-  MovieResult,
-  PersonResult,
-  TvResult,
-} from 'moviedb-promise/dist/request-types'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: StyleGuide.background,
-    paddingHorizontal: 20,
-  },
-
-  scroll: {
-    alignItems: 'center',
-    flex: 0.95,
-  },
-})
+import styles from './styles'
 
 export default function Favorites() {
-  const [favorites, setFavorites] = useState<
-    (MovieResult | TvResult | PersonResult)[]
-  >([])
   const { navigate } = useNavigation()
 
-  useLayoutEffect(() => {
-    const fetchFavorites = async () => {
-      const response = await getAllFromStorage()
+  const { favorites, retryGetFavorites } = useFavorites()
 
-      setFavorites(response)
-    }
+  const [refreshing, setRefreshing] = useState(false)
 
-    fetchFavorites()
-  }, [])
+  async function handleRefresh() {
+    setRefreshing(true)
+
+    await retryGetFavorites()
+
+    setRefreshing(false)
+  }
+
+  if (favorites.loading) {
+    return (
+      <View style={styles.alternativeContainer}>
+        <ActivityIndicator color={StyleGuide.text} size={30} />
+      </View>
+    )
+  }
+
+  if (favorites.error) {
+    return (
+      <View style={styles.alternativeContainer}>
+        <Text style={styles.text}>{favorites.error}</Text>
+        <RectButton onPress={retryGetFavorites}>
+          <Text style={styles.text}>Click to try again</Text>
+        </RectButton>
+      </View>
+    )
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header />
-      <View style={styles.scroll}>
-        {Boolean(favorites) && (
-          <FlatList
-            data={favorites}
-            keyExtractor={(item) => item.id!.toString()}
-            renderItem={({ item }) => (
-              <Card
-                onPress={() => navigate('Details', { item })}
-                key={item.id}
-                name={item.name! || item.title!}
-                date={item.first_air_date}
-                image={item.poster_path || item.backdrop_path}
-                vote_average={item.vote_average}
-              />
-            )}
-          />
-        )}
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      {Boolean(favorites) && (
+        <FlatList
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+          data={favorites.data}
+          keyExtractor={(item) => item.data.id.toString()}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          renderItem={({ item }) => (
+            <Card
+              onPress={() =>
+                navigate('Details', {
+                  item,
+                })
+              }
+              key={item.data.id}
+              name={item.type === 'tvShow' ? item.data.name : item.data.title}
+              date={
+                item.type === 'tvShow'
+                  ? item.data.first_air_date
+                  : item.data.release_date
+              }
+              image={item.data.poster_path}
+              vote_average={item.data.vote_average}
+            />
+          )}
+        />
+      )}
+    </View>
   )
 }

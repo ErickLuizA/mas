@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import Home from '../screens/Home/Home'
 // import Search from '../screens/Search'
-// import Favorites from '../screens/Favorites'
+import Favorites from '../screens/Favorites'
 import StyleGuide from '../components/StyleGuide'
 
 const { Navigator, Screen } = createBottomTabNavigator()
@@ -43,7 +43,7 @@ export default function BottomTab() {
             return <MaterialIcons name="search" size={size} color={color} />
           },
         }}
-      />
+      /> */}
       <Screen
         name="Favorites"
         component={Favorites}
@@ -54,7 +54,7 @@ export default function BottomTab() {
             )
           },
         }}
-      /> */}
+      />
     </Navigator>
   )
 }

@@ -7,7 +7,7 @@ interface StarsProps {
   vote_average: number
 }
 
-export default function Stars({ vote_average }: StarsProps) {
+export default function Stars({ vote_average = 0 }: StarsProps) {
   return (
     <View style={styles.stars}>
       {Array(Math.floor(vote_average / 2))

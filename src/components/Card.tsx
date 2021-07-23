@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
+
 import Stars from './Stars'
 import StyleGuide from './StyleGuide'
 
@@ -9,38 +10,10 @@ interface CardProps {
   image: string
   date: string
   vote_average: number
-
   onPress: () => void
 }
 
 const { width } = Dimensions.get('window')
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: StyleGuide.lightBackground,
-    width: width * 0.8,
-    height: width * 0.25,
-    flexDirection: 'row',
-    marginVertical: 10,
-    borderRadius: 10,
-  },
-
-  image: {
-    width: width * 0.2,
-    height: width * 0.25,
-  },
-
-  text: {
-    color: StyleGuide.text,
-    paddingVertical: 5,
-  },
-
-  right: {
-    width: width * 0.6,
-    height: width * 0.25,
-    paddingHorizontal: 10,
-  },
-})
 
 export default function Card({
   name,
@@ -63,3 +36,28 @@ export default function Card({
     </RectButton>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: StyleGuide.lightBackground,
+    width: '100%',
+    flexDirection: 'row',
+    borderRadius: 10,
+  },
+
+  image: {
+    width: width * 0.25,
+    height: width * 0.3,
+  },
+
+  text: {
+    color: StyleGuide.text,
+    paddingVertical: 5,
+  },
+
+  right: {
+    width: width * 0.6,
+    height: width * 0.25,
+    paddingHorizontal: 10,
+  },
+})
