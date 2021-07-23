@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
-import StyleGuide from '../../components/StyleGuide'
+
+import StyleGuide from '../../utils/StyleGuide'
 
 interface IListViewProps {
   name: string

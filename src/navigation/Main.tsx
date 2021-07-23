@@ -4,8 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Landing from '../screens/Landing'
 import BottomTab from './BottomTab'
 import Details from '../screens/Details'
+
 import Header from '../components/Header'
-import StyleGuide from '../components/StyleGuide'
+
+import StyleGuide from '../utils/StyleGuide'
 
 const { Navigator, Screen } = createStackNavigator()
 

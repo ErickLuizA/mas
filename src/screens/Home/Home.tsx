@@ -10,7 +10,7 @@ import { TvShow } from '../../models/TvShow'
 import useMovies from '../../hooks/useMovies'
 import useTvShows from '../../hooks/useTvShows'
 
-import StyleGuide from '../../components/StyleGuide'
+import StyleGuide from '../../utils/StyleGuide'
 
 import Card from './Card'
 import ListView from './ListView'

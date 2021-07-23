@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 
 import Stars from './Stars'
-import StyleGuide from './StyleGuide'
+
+import StyleGuide from '../utils/StyleGuide'
 
 interface CardProps {
   name: string

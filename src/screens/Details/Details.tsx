@@ -10,8 +10,9 @@ import { TvShow } from '../../models/TvShow'
 
 import useIsFavorite from '../../hooks/useIsFavorite'
 
-import StyleGuide from '../../components/StyleGuide'
 import Stars from '../../components/Stars'
+
+import StyleGuide from '../../utils/StyleGuide'
 
 import styles from './styles'
 

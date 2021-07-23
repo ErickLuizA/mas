@@ -5,7 +5,8 @@ import { MaterialIcons } from '@expo/vector-icons'
 import Home from '../screens/Home/Home'
 import Search from '../screens/Search'
 import Favorites from '../screens/Favorites'
-import StyleGuide from '../components/StyleGuide'
+
+import StyleGuide from '../utils/StyleGuide'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 

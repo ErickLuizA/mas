@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { ActivityIndicator, View, Text, FlatList } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
 
 import useFavorites from '../../hooks/useFavorites'
 
-import StyleGuide from '../../components/StyleGuide'
 import Card from '../../components/Card'
+
+import StyleGuide from '../../utils/StyleGuide'
 
 import styles from './styles'
 

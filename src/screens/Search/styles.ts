@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-import StyleGuide from '../../components/StyleGuide'
+import StyleGuide from '../../utils/StyleGuide'
 
 export default StyleSheet.create({
   container: {

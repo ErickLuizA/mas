@@ -1,12 +1,13 @@
 import React from 'react'
 import { Image, StyleSheet } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { useNavigation } from '@react-navigation/native'
 import { MaterialIcons } from '@expo/vector-icons'
 
+import StyleGuide from '../utils/StyleGuide'
+
 import icon from '../images/icon.png'
-import { RectButton } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native'
-import StyleGuide from './StyleGuide'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Header() {
   const { navigate } = useNavigation()

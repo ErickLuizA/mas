@@ -8,7 +8,8 @@ import useSearch from '../../hooks/useSearch'
 
 import SearchBox from './SearchBox'
 import Card from '../../components/Card'
-import StyleGuide from '../../components/StyleGuide'
+
+import StyleGuide from '../../utils/StyleGuide'
 
 import styles from './styles'
 

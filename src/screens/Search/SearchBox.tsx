@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, StyleSheet, TextInput } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
-import StyleGuide from '../../components/StyleGuide'
+
+import StyleGuide from '../../utils/StyleGuide'
 
 interface SearchBoxProps {
   onChangeText: (text: string) => void

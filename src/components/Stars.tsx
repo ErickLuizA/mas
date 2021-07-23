@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
-import StyleGuide from './StyleGuide'
+
+import StyleGuide from '../utils/StyleGuide'
 
 interface StarsProps {
   vote_average: number

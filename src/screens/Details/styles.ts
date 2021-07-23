@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native'
 
-import StyleGuide from '../../components/StyleGuide'
+import StyleGuide from '../../utils/StyleGuide'
 
 const { width } = Dimensions.get('window')
 
