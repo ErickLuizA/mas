@@ -1,145 +1,85 @@
-import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Image, Dimensions, Text } from 'react-native'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import React from 'react'
+import { View, Image, Text, ScrollView } from 'react-native'
+import { RouteProp, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { MaterialIcons } from '@expo/vector-icons'
-import StyleGuide from '../../components/StyleGuide'
 import { RectButton } from 'react-native-gesture-handler'
+import { MaterialIcons } from '@expo/vector-icons'
+
+import { Movie } from '../../models/Movie'
+import { TvShow } from '../../models/TvShow'
+
+import useIsFavorite from '../../hooks/useIsFavorite'
+
+import StyleGuide from '../../components/StyleGuide'
 import Stars from '../../components/Stars'
-import {
-  addToStorage,
-  getFromStorage,
-  removeFromStorage,
-} from '../../services/storage'
 
-const { width } = Dimensions.get('window')
+import styles from './styles'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: StyleGuide.background,
-  },
+type MovieDetails = {
+  type: 'movie'
+  data: Movie
+}
 
-  close: {
-    position: 'absolute',
-    right: 10,
-    top: 20,
-  },
+type TvShowDetails = {
+  type: 'tvShow'
+  data: TvShow
+}
 
-  backImg: { position: 'absolute', width, height: width * 0.9, opacity: 0.2 },
-
-  img: {
-    width,
-    height: width * 0.8,
-    resizeMode: 'contain',
-  },
-
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-
-  text: {
-    fontFamily: 'Roboto_700Bold',
-    fontSize: 18,
-    color: StyleGuide.text,
-  },
-
-  smallText: {
-    fontFamily: 'Roboto_500Medium',
-    fontSize: 14,
-    color: StyleGuide.text,
-    textAlign: 'left',
-  },
-
-  box: {
-    paddingHorizontal: 20,
-  },
-})
+type DetailsItem = MovieDetails | TvShowDetails
 
 type ParamList = {
   Details: {
-    item: {
-      backdrop_path: string
-      id: number
-      name: string
-      title: string
-      original_language: string
-      original_name: string
-      overview: string
-      popularity: number
-      poster_path: string
-      vote_average: number
-    }
+    item: DetailsItem
   }
 }
 
 type DetailsScreenRouteProp = RouteProp<ParamList, 'Details'>
 
 export default function Details() {
-  const { params } = useRoute<DetailsScreenRouteProp>()
-  const { goBack } = useNavigation()
-
-  const [favorite, setFavorite] = useState(false)
-
-  useEffect(() => {
-    const fetchResults = async () => {
-      const response = await getFromStorage(params.item)
-
-      setFavorite(response)
-    }
-
-    fetchResults()
-  }, [params.item])
-
-  const toggleFavorite = async () => {
-    if (!favorite) {
-      setFavorite(true)
-      await addToStorage(params.item)
-    } else {
-      setFavorite(false)
-      await removeFromStorage(params.item)
-    }
-  }
+  const {
+    params: { item },
+  } = useRoute<DetailsScreenRouteProp>()
+  const { isFavorite, toggleFavorite } = useIsFavorite({
+    item: item.data,
+  })
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Image
-          source={{
-            uri: `https://image.tmdb.org/t/p/w500/${params.item.poster_path}`,
-          }}
-          style={styles.backImg}
-        />
-        <Image
-          source={{
-            uri: `https://image.tmdb.org/t/p/w500/${params.item.poster_path}`,
-          }}
-          style={styles.img}
-        />
-        <RectButton style={styles.close} onPress={() => goBack()}>
-          <MaterialIcons name="close" size={40} color={StyleGuide.text} />
-        </RectButton>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.text}>{params.item.title || params.item.name}</Text>
-        <RectButton onPress={toggleFavorite}>
-          <MaterialIcons
-            name={favorite ? 'favorite' : 'favorite-border'}
-            size={30}
-            color={StyleGuide.text}
+      <ScrollView>
+        <View>
+          <Image
+            source={{
+              uri: `https://image.tmdb.org/t/p/w500/${item.data.poster_path}`,
+            }}
+            style={styles.backImg}
           />
-        </RectButton>
-      </View>
-      <View style={styles.row}>
-        <Stars vote_average={params.item.vote_average} />
-      </View>
-      <View style={styles.box}>
-        <Text style={styles.text}>Sinopse </Text>
-        <Text style={styles.smallText}>{params.item.overview} </Text>
-      </View>
+          <Image
+            source={{
+              uri: `https://image.tmdb.org/t/p/w500/${item.data.poster_path}`,
+            }}
+            style={styles.img}
+          />
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.text}>
+            {item.type === 'tvShow' ? item.data.name : item.data.title}
+          </Text>
+          <RectButton onPress={toggleFavorite}>
+            <MaterialIcons
+              name={isFavorite ? 'favorite' : 'favorite-border'}
+              size={30}
+              color={StyleGuide.text}
+            />
+          </RectButton>
+        </View>
+        <View style={styles.row}>
+          <Stars vote_average={item.data.vote_average} />
+        </View>
+        <View style={styles.box}>
+          <Text style={styles.text}>Sinopse </Text>
+          <Text style={styles.smallText}>{item.data.overview} </Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }

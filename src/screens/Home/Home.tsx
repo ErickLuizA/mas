@@ -101,7 +101,7 @@ export default function Home() {
                   poster_path={item.poster_path}
                   onPress={() =>
                     navigate('Details', {
-                      item,
+                      item: { type: 'tvShow', data: item },
                     })
                   }
                 />
@@ -118,7 +118,7 @@ export default function Home() {
                   poster_path={item.poster_path}
                   onPress={() =>
                     navigate('Details', {
-                      item,
+                      item: { type: 'tvShow', data: item },
                     })
                   }
                 />
@@ -137,7 +137,7 @@ export default function Home() {
                   poster_path={item.poster_path}
                   onPress={() =>
                     navigate('Details', {
-                      item,
+                      item: { type: 'movie', data: item },
                     })
                   }
                 />
@@ -154,7 +154,7 @@ export default function Home() {
                   poster_path={item.poster_path}
                   onPress={() =>
                     navigate('Details', {
-                      item,
+                      item: { type: 'movie', data: item },
                     })
                   }
                 />

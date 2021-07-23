@@ -3,8 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Landing from '../screens/Landing'
 import BottomTab from './BottomTab'
-// import Details from '../screens/Details'
+import Details from '../screens/Details'
 import Header from '../components/Header'
+import StyleGuide from '../components/StyleGuide'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -24,7 +25,16 @@ export default function Main() {
           },
         }}
       />
-      {/* <Screen name="Details" component={Details} /> */}
+      <Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerShown: true,
+          headerTransparent: true,
+          headerTintColor: StyleGuide.text,
+          title: '',
+        }}
+      />
     </Navigator>
   )
 }
