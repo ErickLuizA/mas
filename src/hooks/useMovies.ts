@@ -10,7 +10,12 @@ type MoviesData = {
   latestMovies: Movie[]
 }
 
-export default function useMovies() {
+interface IUseMoviesReturn {
+  moviesData: MoviesData
+  retryGetMovies: () => Promise<void>
+}
+
+export default function useMovies(): IUseMoviesReturn {
   const [moviesData, setMoviesData] = useState<MoviesData>({
     loading: true,
     error: '',

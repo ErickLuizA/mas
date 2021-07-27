@@ -10,7 +10,12 @@ type TvShowsData = {
   latestTvShows: TvShow[]
 }
 
-export default function useTvShows() {
+interface IUseTvShowsReturn {
+  tvShowsData: TvShowsData
+  retryGetTvShows: () => Promise<void>
+}
+
+export default function useTvShows(): IUseTvShowsReturn {
   const [tvShowsData, setTvShowsData] = useState<TvShowsData>({
     loading: true,
     error: '',

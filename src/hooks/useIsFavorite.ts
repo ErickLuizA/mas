@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect, useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Movie } from '../models/Movie'
 import { TvShow } from '../models/TvShow'
 
@@ -19,7 +19,14 @@ type FavoriteTvShow = {
 
 type Favorite = FavoriteMovie | FavoriteTvShow
 
-export default function useIsFavorite({ item }: IUseIsFavoriteProps) {
+interface IUseIsFavoriteReturn {
+  isFavorite: boolean
+  toggleFavorite: () => Promise<void>
+}
+
+export default function useIsFavorite({
+  item,
+}: IUseIsFavoriteProps): IUseIsFavoriteReturn {
   const [isFavorite, setIsFavorite] = useState(false)
 
   useEffect(() => {

@@ -11,7 +11,12 @@ type SearchResultState = {
   data: SearchResult[]
 }
 
-export default function useSearch() {
+interface IUseSearchReturn {
+  searchResult: SearchResultState
+  getSearched: (query: string) => Promise<void>
+}
+
+export default function useSearch(): IUseSearchReturn {
   const [searchResult, setSearchResult] = useState<SearchResultState>({
     loading: false,
     error: '',

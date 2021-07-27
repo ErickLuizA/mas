@@ -21,7 +21,12 @@ type Favorites = {
   data: Favorite[]
 }
 
-export default function useFavorites() {
+interface IUseFavoritesReturn {
+  favorites: Favorites
+  retryGetFavorites: () => Promise<void>
+}
+
+export default function useFavorites(): IUseFavoritesReturn {
   const [favorites, setFavorites] = useState<Favorites>({
     loading: true,
     error: '',
