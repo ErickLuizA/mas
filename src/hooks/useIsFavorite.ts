@@ -7,7 +7,7 @@ interface IUseIsFavoriteProps {
   item: Favorite
 }
 
-type FavoriteMovie = {
+export type FavoriteMovie = {
   type: 'movie'
   data: Movie
 }
@@ -32,7 +32,29 @@ export default function useIsFavorite({
   useEffect(() => {
     // eslint-disable-next-line prettier/prettier
     (async () => {
+      try {
+        const favorites = await AsyncStorage.getItem('@Mas/favorites')
+        let favoritesArray: Favorite[] = []
+
+        if (favorites) {
+          favoritesArray = JSON.parse(favorites)
+        }
+
+        const favoriteIndex = favoritesArray.findIndex(
+          (fav) => item.data.id === fav.data.id,
+        )
+
+        setIsFavorite(favoriteIndex !== -1)
+      } catch (error) {
+        setIsFavorite(false)
+      }
+    })()
+  }, [item])
+
+  async function toggleFavorite() {
+    try {
       const favorites = await AsyncStorage.getItem('@Mas/favorites')
+
       let favoritesArray: Favorite[] = []
 
       if (favorites) {
@@ -43,32 +65,19 @@ export default function useIsFavorite({
         (fav) => item.data.id === fav.data.id,
       )
 
-      setIsFavorite(favoriteIndex !== -1)
-    })()
-  }, [item])
+      if (favoriteIndex !== -1) {
+        favoritesArray.splice(favoriteIndex, 1)
+      } else {
+        favoritesArray.push(item)
+      }
 
-  async function toggleFavorite() {
-    setIsFavorite((state) => !state)
+      await AsyncStorage.setItem(
+        '@Mas/favorites',
+        JSON.stringify(favoritesArray),
+      )
 
-    const favorites = await AsyncStorage.getItem('@Mas/favorites')
-
-    let favoritesArray: Favorite[] = []
-
-    if (favorites) {
-      favoritesArray = JSON.parse(favorites)
-    }
-
-    const favoriteIndex = favoritesArray.findIndex(
-      (fav) => item.data.id === fav.data.id,
-    )
-
-    if (favoriteIndex !== -1) {
-      favoritesArray.splice(favoriteIndex, 1)
-    } else {
-      favoritesArray.push(item)
-    }
-
-    await AsyncStorage.setItem('@Mas/favorites', JSON.stringify(favoritesArray))
+      setIsFavorite((state) => !state)
+    } catch (error) {}
   }
 
   return { isFavorite, toggleFavorite }
