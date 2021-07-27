@@ -38,19 +38,27 @@ export default function useFavorites(): IUseFavoritesReturn {
   }, [])
 
   async function getFavorites() {
-    const storagedFavs = await AsyncStorage.getItem('@Mas/favorites')
+    try {
+      const storagedFavs = await AsyncStorage.getItem('@Mas/favorites')
 
-    let favoritesArray: Favorite[] = []
+      let favoritesArray: Favorite[] = []
 
-    if (storagedFavs) {
-      favoritesArray = JSON.parse(storagedFavs)
+      if (storagedFavs) {
+        favoritesArray = JSON.parse(storagedFavs)
+      }
+
+      setFavorites({
+        data: favoritesArray,
+        error: '',
+        loading: false,
+      })
+    } catch (error) {
+      setFavorites({
+        data: [],
+        error: 'Error while getting favorites from storage',
+        loading: false,
+      })
     }
-
-    setFavorites({
-      data: favoritesArray,
-      error: '',
-      loading: false,
-    })
   }
 
   async function retryGetFavorites() {
