@@ -21,7 +21,7 @@ export default function Main() {
         options={{
           headerShown: true,
           header: (props: any) => {
-            if (props.scene.route.state.index !== 1) {
+            if (props.scene?.route?.state?.index !== 1) {
               return <Header />
             }
           },
