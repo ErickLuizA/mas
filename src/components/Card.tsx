@@ -24,14 +24,17 @@ export default function Card({
   onPress,
 }: CardProps) {
   return (
-    <RectButton style={styles.container} {...{ onPress }}>
+    <RectButton
+      testID="card_button_test"
+      style={styles.container}
+      {...{ onPress }}>
       <Image
         source={{ uri: `https://image.tmdb.org/t/p/w500${image}` }}
         style={styles.image}
       />
       <View style={styles.right}>
-        <Text style={styles.text}>{name} </Text>
-        {Boolean(date) && <Text style={styles.text}>{date.slice(0, 4)} </Text>}
+        <Text style={styles.text}>{name}</Text>
+        {Boolean(date) && <Text style={styles.text}>{date.slice(0, 4)}</Text>}
         <Stars key={name} {...{ vote_average }} />
       </View>
     </RectButton>
