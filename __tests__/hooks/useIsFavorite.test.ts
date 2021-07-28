@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { renderHook } from '@testing-library/react-hooks'
-import { act, waitFor } from '@testing-library/react-native'
+import { renderHook, act } from '@testing-library/react-hooks'
 
 import useIsFavorite, { FavoriteMovie } from '../../src/hooks/useIsFavorite'
 
@@ -33,7 +32,9 @@ describe('useIsFavorite hook', () => {
 
   describe('Get Favorite', () => {
     it('should begin with isFavorite false in initial state', async () => {
-      const { result } = renderHook(() => useIsFavorite({ item: favoriteItem }))
+      const { result, waitFor } = renderHook(() =>
+        useIsFavorite({ item: favoriteItem }),
+      )
 
       expect(result.current.isFavorite).toBe(false)
 
@@ -45,7 +46,9 @@ describe('useIsFavorite hook', () => {
         Promise.resolve(JSON.stringify([favoriteItem])),
       )
 
-      const { result } = renderHook(() => useIsFavorite({ item: favoriteItem }))
+      const { result, waitFor } = renderHook(() =>
+        useIsFavorite({ item: favoriteItem }),
+      )
 
       await waitFor(() => {
         expect(result.current.isFavorite).toBe(true)
@@ -57,7 +60,9 @@ describe('useIsFavorite hook', () => {
         Promise.resolve(JSON.stringify([{ type: 'movie', data: { id: 2 } }])),
       )
 
-      const { result } = renderHook(() => useIsFavorite({ item: favoriteItem }))
+      const { result, waitFor } = renderHook(() =>
+        useIsFavorite({ item: favoriteItem }),
+      )
 
       await waitFor(() => {
         expect(result.current.isFavorite).toBe(false)
@@ -67,7 +72,9 @@ describe('useIsFavorite hook', () => {
     it('should return false in isFavorite if async storage throws error', async () => {
       mockedAsyncStorage.getItem.mockResolvedValue(Promise.reject())
 
-      const { result } = renderHook(() => useIsFavorite({ item: favoriteItem }))
+      const { result, waitFor } = renderHook(() =>
+        useIsFavorite({ item: favoriteItem }),
+      )
 
       await waitFor(() => {
         expect(result.current.isFavorite).toBe(false)
@@ -81,7 +88,9 @@ describe('useIsFavorite hook', () => {
         Promise.resolve(JSON.stringify([{ type: 'movie', data: { id: 2 } }])),
       )
 
-      const { result } = renderHook(() => useIsFavorite({ item: favoriteItem }))
+      const { result, waitFor } = renderHook(() =>
+        useIsFavorite({ item: favoriteItem }),
+      )
 
       await act(async () => await result.current.toggleFavorite())
 
@@ -99,7 +108,9 @@ describe('useIsFavorite hook', () => {
         Promise.resolve(JSON.stringify([favoriteItem])),
       )
 
-      const { result } = renderHook(() => useIsFavorite({ item: favoriteItem }))
+      const { result, waitFor } = renderHook(() =>
+        useIsFavorite({ item: favoriteItem }),
+      )
 
       await act(async () => await result.current.toggleFavorite())
 
