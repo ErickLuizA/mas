@@ -15,6 +15,7 @@ export default function Stars({ vote_average = 0 }: StarsProps) {
         .fill('')
         .map((val, index) => (
           <MaterialIcons
+            testID="Stars_star_test"
             key={index}
             name="star"
             size={24}
@@ -24,6 +25,7 @@ export default function Stars({ vote_average = 0 }: StarsProps) {
 
       {vote_average / 2 > Math.floor(vote_average / 2) && (
         <MaterialIcons
+          testID="Stars_half_star_test"
           key="half-star"
           name="star-half"
           size={24}
