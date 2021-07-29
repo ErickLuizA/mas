@@ -28,7 +28,11 @@ export default function Home() {
   if (tvShowsData.loading || moviesData.loading) {
     return (
       <View style={styles.alternativeContainer}>
-        <ActivityIndicator color={StyleGuide.text} size={30} />
+        <ActivityIndicator
+          testID="Home_loading_indicator_test"
+          color={StyleGuide.text}
+          size={30}
+        />
       </View>
     )
   }
@@ -40,6 +44,7 @@ export default function Home() {
           {tvShowsData.error ? tvShowsData.error : moviesData.error}
         </Text>
         <RectButton
+          testID="Home_try_again_button_test"
           onPress={async () => {
             if (tvShowsData.error) {
               await retryGetTvShows()
@@ -100,9 +105,7 @@ export default function Home() {
             <Text
               style={[
                 styles.rectButtonText,
-                {
-                  color: isTv ? StyleGuide.background : StyleGuide.text,
-                },
+                { color: isTv ? StyleGuide.background : StyleGuide.text },
               ]}>
               Movies
             </Text>
