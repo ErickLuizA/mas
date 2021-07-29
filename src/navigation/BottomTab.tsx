@@ -10,9 +10,10 @@ import StyleGuide from '../utils/StyleGuide'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
-export default function BottomTab() {
+export default function BottomTab({ initialRouteName = 'Home' }) {
   return (
     <Navigator
+      initialRouteName={initialRouteName}
       tabBarOptions={{
         style: {
           backgroundColor: StyleGuide.primary,

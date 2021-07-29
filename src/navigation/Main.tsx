@@ -11,9 +11,11 @@ import StyleGuide from '../utils/StyleGuide'
 
 const { Navigator, Screen } = createStackNavigator()
 
-export default function Main() {
+export default function Main({ initialRouteName = 'Landing' }) {
   return (
-    <Navigator screenOptions={{ headerShown: false }}>
+    <Navigator
+      initialRouteName={initialRouteName}
+      screenOptions={{ headerShown: false }}>
       <Screen name="Landing" component={Landing} />
       <Screen
         name="BottomTab"
