@@ -53,6 +53,9 @@
     ],   
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|@expo-google-fonts|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ],
+    "testPathIgnorePatterns" : [
+      "<rootDir>/__tests__/testUtils" 
     ]
   },
   "private": true
