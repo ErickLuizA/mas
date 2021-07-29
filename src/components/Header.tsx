@@ -16,6 +16,7 @@ export default function Header() {
     <SafeAreaView style={styles.container}>
       <Image source={icon} />
       <RectButton
+        testID="header_button_test"
         rippleColor={StyleGuide.primary}
         onPress={() => navigate('Search')}>
         <MaterialIcons name="search" size={30} color="#ddd" />
