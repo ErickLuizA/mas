@@ -15,14 +15,18 @@ const { width } = Dimensions.get('window')
 
 export default function Card({ id, name, poster_path, onPress }: CardProps) {
   return (
-    <RectButton key={id} style={styles.container} {...{ onPress }}>
+    <RectButton
+      testID="Card_button_test"
+      key={id}
+      style={styles.container}
+      {...{ onPress }}>
       <Image
         source={{
           uri: `https://image.tmdb.org/t/p/w500${poster_path}`,
         }}
         style={styles.img}
       />
-      <Text style={styles.text}>{name} </Text>
+      <Text style={styles.text}>{name}</Text>
     </RectButton>
   )
 }
