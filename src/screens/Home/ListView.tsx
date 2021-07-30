@@ -12,7 +12,7 @@ interface IListViewProps {
 export default function ListView({ name, data, renderItem }: IListViewProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}> {name} </Text>
+      <Text style={styles.text}>{name}</Text>
       <FlatList
         data={data}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
