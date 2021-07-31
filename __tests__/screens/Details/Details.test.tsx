@@ -22,7 +22,7 @@ describe('Details Screen', () => {
 
     await waitFor(() => {
       expect(queryByText('Black Widow')).not.toBeNull()
-      expect(queryByText('Sinopse')).not.toBeNull()
+      expect(queryByText('Synopsis')).not.toBeNull()
       expect(queryByText('overview')).not.toBeNull()
     })
   })

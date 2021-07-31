@@ -78,7 +78,7 @@ export default function Details() {
           <Stars vote_average={item.data.vote_average} />
         </View>
         <View style={styles.box}>
-          <Text style={styles.text}>Sinopse</Text>
+          <Text style={styles.text}>Synopsis</Text>
           <Text style={styles.smallText}>{item.data.overview}</Text>
         </View>
       </ScrollView>
