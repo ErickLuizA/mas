@@ -65,9 +65,10 @@ export default function Details() {
           <Text style={styles.text}>
             {item.type === 'tvShow' ? item.data.name : item.data.title}
           </Text>
-          <RectButton onPress={toggleFavorite}>
+          <RectButton testID="Details_button_test" onPress={toggleFavorite}>
             <MaterialIcons
               name={isFavorite ? 'favorite' : 'favorite-border'}
+              accessibilityLabel={isFavorite ? 'favorite' : 'favorite-border'}
               size={30}
               color={StyleGuide.text}
             />
@@ -77,8 +78,8 @@ export default function Details() {
           <Stars vote_average={item.data.vote_average} />
         </View>
         <View style={styles.box}>
-          <Text style={styles.text}>Sinopse </Text>
-          <Text style={styles.smallText}>{item.data.overview} </Text>
+          <Text style={styles.text}>Sinopse</Text>
+          <Text style={styles.smallText}>{item.data.overview}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
