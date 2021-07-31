@@ -89,4 +89,14 @@ describe('Search Screen', () => {
       expect(queryByText('Black Widow')).not.toBeNull()
     })
   })
+
+  it('should change display value when text is changed', async () => {
+    const { queryByTestId, queryByDisplayValue } = render(Screen('Search'))
+
+    await waitFor(async () => {
+      fireEvent.changeText(queryByTestId('Search_text_input_test')!, 'hello')
+
+      expect(queryByDisplayValue('hello')).not.toBeNull()
+    })
+  })
 })
