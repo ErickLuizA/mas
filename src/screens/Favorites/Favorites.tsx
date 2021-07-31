@@ -29,7 +29,11 @@ export default function Favorites() {
   if (favorites.loading) {
     return (
       <View style={styles.alternativeContainer}>
-        <ActivityIndicator color={StyleGuide.text} size={30} />
+        <ActivityIndicator
+          testID="Favorites_loading_indicator_test"
+          color={StyleGuide.text}
+          size={30}
+        />
       </View>
     )
   }
@@ -38,7 +42,9 @@ export default function Favorites() {
     return (
       <View style={styles.alternativeContainer}>
         <Text style={styles.text}>{favorites.error}</Text>
-        <RectButton onPress={retryGetFavorites}>
+        <RectButton
+          testID="Favorites_try_again_button_test"
+          onPress={retryGetFavorites}>
           <Text style={styles.text}>Click to try again</Text>
         </RectButton>
       </View>
@@ -47,8 +53,9 @@ export default function Favorites() {
 
   return (
     <View style={styles.container}>
-      {Boolean(favorites) && (
+      {favorites.data.length > 0 && (
         <FlatList
+          testID="Favorites_flat_list_test"
           refreshing={refreshing}
           onRefresh={handleRefresh}
           data={favorites.data}
