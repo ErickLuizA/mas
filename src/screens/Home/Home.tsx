@@ -64,6 +64,7 @@ export default function Home() {
     <View style={styles.container}>
       <View style={styles.row}>
         <RectButton
+          testID="Home_tv_button_test"
           onPress={() => setisTv((state) => !state)}
           style={[
             styles.rectButton,
@@ -89,6 +90,7 @@ export default function Home() {
           </>
         </RectButton>
         <RectButton
+          testID="Home_movie_button_test"
           onPress={() => setisTv((state) => !state)}
           style={[
             styles.rectButton,

@@ -3,6 +3,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react-native'
 import { Screen } from '../../testUtils/renderBottomTabNavigation'
 
 import api from '../../../src/services/api'
+import { mockStyleGuide } from '../../testUtils/mockStyleGuide'
 
 jest.mock('../../../src/services/api')
 
@@ -56,6 +57,50 @@ describe('Home Screen', () => {
     await waitFor(() => {
       expect(queryByText('Movies')).not.toBeNull()
       expect(queryByText('Tv Shows')).not.toBeNull()
+    })
+  })
+
+  it('should change isTv state when tv button is pressed', async () => {
+    mockedAxios.get.mockResolvedValue(
+      Promise.resolve({
+        data: { results: [] },
+      }),
+    )
+
+    const { queryByTestId } = render(Screen('Home'))
+
+    await waitFor(async () => {
+      expect(
+        queryByTestId('Home_tv_button_test')?.props.style.backgroundColor,
+      ).toBe(mockStyleGuide.primary)
+
+      await fireEvent.press(queryByTestId('Home_tv_button_test')!)
+
+      expect(
+        queryByTestId('Home_tv_button_test')?.props.style.backgroundColor,
+      ).toBe(mockStyleGuide.text)
+    })
+  })
+
+  it('should change isTv state when movie button is pressed', async () => {
+    mockedAxios.get.mockResolvedValue(
+      Promise.resolve({
+        data: { results: [] },
+      }),
+    )
+
+    const { queryByTestId } = render(Screen('Home'))
+
+    await waitFor(async () => {
+      expect(
+        queryByTestId('Home_movie_button_test')?.props.style.backgroundColor,
+      ).toBe(mockStyleGuide.text)
+
+      await fireEvent.press(queryByTestId('Home_movie_button_test')!)
+
+      expect(
+        queryByTestId('Home_movie_button_test')?.props.style.backgroundColor,
+      ).toBe(mockStyleGuide.primary)
     })
   })
 })
