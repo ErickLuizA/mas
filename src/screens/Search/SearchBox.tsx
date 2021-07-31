@@ -18,6 +18,7 @@ export default function SearchBox({
   return (
     <View style={styles.container}>
       <TextInput
+        testID="Search_text_input_test"
         autoCapitalize="words"
         enablesReturnKeyAutomatically
         returnKeyType="search"

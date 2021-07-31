@@ -35,6 +35,7 @@ export default function Search() {
           onSubmitEditing={() => {}}
         />
         <ActivityIndicator
+          testID="Search_loading_indicator_test"
           style={styles.flex}
           color={StyleGuide.text}
           size={30}
@@ -53,7 +54,9 @@ export default function Search() {
         />
         <View style={styles.flex}>
           <Text style={styles.text}>{searchResult.error}</Text>
-          <RectButton onPress={handleSubmit}>
+          <RectButton
+            testID="Search_try_again_button_test"
+            onPress={handleSubmit}>
             <Text style={styles.text}>Click to try again</Text>
           </RectButton>
         </View>
