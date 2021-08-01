@@ -71,7 +71,8 @@ $ npm start or yarn start
 
 <div>
   <img alt="Mas screenshot" src="./.github/Landing.png"  width="200"/>
-  <img alt="Mas screenshot" src="./.github/Home.png"  width="200"/>
+  <img alt="Mas screenshot" src="./.github/HomeTv.png"  width="200"/>
+    <img alt="Mas screenshot" src="./.github/HomeMovie.png"  width="200"/>
   <img alt="Mas screenshot" src="./.github/Details.png"  width="200"/>
   <img alt="Mas screenshot" src="./.github/Search.png"  width="200"/>
   <img alt="Mas screenshot" src="./.github/Favorites.png"  width="200"/>
