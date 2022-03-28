@@ -1,7 +1,7 @@
-<h1 align="center"> MaS </h1>
+<h1 align="center"> mas </h1>
 
 <p align="center">
-  <a href="https://github.com/ErickLuizA/MaS/graphs/commit-activity" alt="Maintenance">
+  <a href="https://github.com/ErickLuizA/mas/graphs/commit-activity" alt="Maintenance">
     <img src="https://img.shields.io/badge/Maintained%3F-yes-1EAE72.svg" />
   </a>
 
@@ -11,12 +11,12 @@
 
 <br/>
 
-<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/ErickLuizA/MaS?color=blue">
+<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/ErickLuizA/mas?color=blue">
 
-<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/ErickLuizA/MaS">
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/ErickLuizA/mas">
 
-<a href="https://github.com/ErickLuizA/MaS/stargazers">
-  <img alt="GitHub stars" src="https://img.shields.io/github/stars/ErickLuizA/MaS?style=social">
+<a href="https://github.com/ErickLuizA/mas/stargazers">
+  <img alt="GitHub stars" src="https://img.shields.io/github/stars/ErickLuizA/mas?style=social">
 </a>
 
 <p align="center">
@@ -29,7 +29,7 @@
 
 ## :clipboard: Description
 
-MaS is a app for searching Movies and Series
+mas is a app for searching Movies and Series
 
 ## :building_construction: Technologies
 
@@ -43,17 +43,17 @@ MaS is a app for searching Movies and Series
 
 ```shell
  # With git
- $ git clone https://github.com/ErickLuizA/MaS.git
+ $ git clone https://github.com/ErickLuizA/mas.git
  
  # With github cli
- $ gh repo clone ErickLuizA/MaS
+ $ gh repo clone ErickLuizA/mas
 ```
 
 ## 2. Installation
 
 ```shell
 # Go into the repository
-$ cd MaS
+$ cd mas
 ```
 
 ```shell
@@ -70,12 +70,12 @@ $ npm start or yarn start
 ## :framed_picture: Screenshots
 
 <div>
-  <img alt="Mas screenshot" src="./.github/Landing.png"  width="200"/>
-  <img alt="Mas screenshot" src="./.github/HomeTv.png"  width="200"/>
-    <img alt="Mas screenshot" src="./.github/HomeMovie.png"  width="200"/>
-  <img alt="Mas screenshot" src="./.github/Details.png"  width="200"/>
-  <img alt="Mas screenshot" src="./.github/Search.png"  width="200"/>
-  <img alt="Mas screenshot" src="./.github/Favorites.png"  width="200"/>
+  <img alt="mas screenshot" src="./.github/Landing.png"  width="200"/>
+  <img alt="mas screenshot" src="./.github/HomeTv.png"  width="200"/>
+    <img alt="mas screenshot" src="./.github/HomeMovie.png"  width="200"/>
+  <img alt="mas screenshot" src="./.github/Details.png"  width="200"/>
+  <img alt="mas screenshot" src="./.github/Search.png"  width="200"/>
+  <img alt="mas screenshot" src="./.github/Favorites.png"  width="200"/>
 </div>
 
 ## :memo: License
