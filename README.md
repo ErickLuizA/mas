@@ -1,7 +1,7 @@
-<h1 align="center"> mas </h1>
+<h1 align="center"> rn-movie-app </h1>
 
 <p align="center">
-  <a href="https://github.com/ErickLuizA/mas/graphs/commit-activity" alt="Maintenance">
+  <a href="https://github.com/ErickLuizA/rn-movie-app/graphs/commit-activity" alt="Maintenance">
     <img src="https://img.shields.io/badge/Maintained%3F-yes-1EAE72.svg" />
   </a>
 
@@ -11,12 +11,12 @@
 
 <br/>
 
-<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/ErickLuizA/mas?color=blue">
+<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/ErickLuizA/rn-movie-app?color=blue">
 
-<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/ErickLuizA/mas">
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/ErickLuizA/rn-movie-app">
 
-<a href="https://github.com/ErickLuizA/mas/stargazers">
-  <img alt="GitHub stars" src="https://img.shields.io/github/stars/ErickLuizA/mas?style=social">
+<a href="https://github.com/ErickLuizA/rn-movie-app/stargazers">
+  <img alt="GitHub stars" src="https://img.shields.io/github/stars/ErickLuizA/rn-movie-app?style=social">
 </a>
 
 <p align="center">
@@ -29,7 +29,7 @@
 
 ## :clipboard: Description
 
-mas is a app for searching Movies and Series
+rn-movie-app is a app for searching Movies and Series
 
 ## :building_construction: Technologies
 
@@ -43,17 +43,17 @@ mas is a app for searching Movies and Series
 
 ```shell
  # With git
- $ git clone https://github.com/ErickLuizA/mas.git
+ $ git clone https://github.com/ErickLuizA/rn-movie-app.git
  
  # With github cli
- $ gh repo clone ErickLuizA/mas
+ $ gh repo clone ErickLuizA/rn-movie-app
 ```
 
 ## 2. Installation
 
 ```shell
 # Go into the repository
-$ cd mas
+$ cd rn-movie-app
 ```
 
 ```shell
@@ -70,12 +70,12 @@ $ npm start or yarn start
 ## :framed_picture: Screenshots
 
 <div>
-  <img alt="mas screenshot" src="./.github/Landing.png"  width="200"/>
-  <img alt="mas screenshot" src="./.github/HomeTv.png"  width="200"/>
-    <img alt="mas screenshot" src="./.github/HomeMovie.png"  width="200"/>
-  <img alt="mas screenshot" src="./.github/Details.png"  width="200"/>
-  <img alt="mas screenshot" src="./.github/Search.png"  width="200"/>
-  <img alt="mas screenshot" src="./.github/Favorites.png"  width="200"/>
+  <img alt="rn-movie-app screenshot" src="./.github/Landing.png"  width="200"/>
+  <img alt="rn-movie-app screenshot" src="./.github/HomeTv.png"  width="200"/>
+    <img alt="rn-movie-app screenshot" src="./.github/HomeMovie.png"  width="200"/>
+  <img alt="rn-movie-app screenshot" src="./.github/Details.png"  width="200"/>
+  <img alt="rn-movie-app screenshot" src="./.github/Search.png"  width="200"/>
+  <img alt="rn-movie-app screenshot" src="./.github/Favorites.png"  width="200"/>
 </div>
 
 ## :memo: License
